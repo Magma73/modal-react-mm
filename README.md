@@ -159,5 +159,3 @@ Marine Magnin
 
 ## License
 ISC © [Marine Magnin](https://github.com/Magma73/)
-
-### Keywords
