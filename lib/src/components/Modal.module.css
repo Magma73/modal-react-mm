@@ -22,3 +22,31 @@ body {
   z-index:3;
   }
 
+  .containerInformations{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    width: 80%;
+    max-width: 560px;
+    min-width: 280px;
+    margin: auto;
+    padding: 13px 21px;
+    background:white;
+    border-radius:20px;
+    position:relative;
+}
+.picture{
+    position:absolute;
+    top: -7px;
+    right: -4px;
+    width: 35px;
+    align-self: flex-end;
+}
+.picture:hover{
+        cursor:pointer;
+}
+.btnClose{
+    margin: 10px 80px 0 80px;
+    cursor:pointer;
+}
