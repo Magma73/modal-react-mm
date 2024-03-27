@@ -2,7 +2,7 @@
   "name": "@magma73/modal-react",
   "description": "A simple and customizable modal component for React applications.",
   "private": false,
-  "version": "0.0.25",
+  "version": "1.0.0",
   "type": "module",
   "files": [
     "dist"
