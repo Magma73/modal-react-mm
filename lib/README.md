@@ -1,4 +1,4 @@
-[![React version](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) [![CSS version](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/#specs) [![Vite version](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/) [![NPM version](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) [![Node version](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/en)
+[![React version](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) [![CSS version](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/#specs) [![Vite version](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/) [![NPM version](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/) [![Node version](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/en)![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
 # @magma/modal-react
 
@@ -21,6 +21,7 @@ The Modal React component provides a flexible and customizable modal window for 
 * PropTypes V15.8.1
 * NPM V10.2.3
 * NodeJS V20.10.0
+* VS Code
 
 ## Install
 To install, you can use [npm](https://npmjs.org/) or [yarn](https://yarnpkg.com):
@@ -39,10 +40,20 @@ import '@magma73/modal-react/dist/style.css';
 
 const App = () => {
 
+    const [lastActiveElement, setLastActiveElement] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    const openModal = () => {
+        setLastActiveElement(document.activeElement);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false)
+        if (lastActiveElement) {
+            lastActiveElement.focus();
+        }
+    };
 
     return (
 
@@ -52,20 +63,11 @@ const App = () => {
 
 
     <Modal
-        isOpen={isModalOpen}
+        isOpen={isOpen}
         closeModal={closeModal}
-        customStyles={styles.modalContent}
-    >
-        <div>
-            <h2>Modal Title</h2>
-            <button
-                onClick={closeModal}
-                aria-label="Close Modal"
-            >
-                Close
-            </button>
-        </div>
-    </Modal>
+        title="Employee Created"
+        titleClose="Close"
+    />
 
     </>
 
@@ -88,12 +90,13 @@ import '@magma73/modal-react/dist/style.css';
 
 ```
 
-2. Create open/close state with useState hook
+2. Create open/close state and save the currently active element with useState hook
 ```jsx
 import React, { useState } from 'react';
 
 const App = () => {
 
+    const [lastActiveElement, setLastActiveElement] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
   ...
@@ -106,17 +109,27 @@ const App = () => {
 3. Create functions open/close
 
 ```jsx
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    const openModal = () => {
+        setLastActiveElement(document.activeElement);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false)
+        if (lastActiveElement) {
+            lastActiveElement.focus();
+        }
+    };
 ```
 
 4. Add component in render with props
 
 ```jsx
     <Modal
-        isOpen={isModalOpen}
+        isOpen={isOpen}
         closeModal={closeModal}
-        customStyles={styles.modalContent}
+        title="Modal Component"
+        titleClose="Close"
     />
 ```
 
@@ -124,19 +137,12 @@ const App = () => {
 
 ```jsx
     <Modal
-        isOpen={isModalOpen}
+        isOpen={isOpen}
         closeModal={closeModal}
-        customStyles={styles.modalContent}
+        title="Modal Component"
+        titleClose="Close"
     >
-        <div>
-            <h2>Modal Title</h2>
-            <button
-                onClick={closeModal}
-                aria-label="Close Modal"
-            >
-                Close
-            </button>
-        </div>
+        <p>Hello world !</p>
     </Modal>
 ```
 
@@ -144,6 +150,28 @@ const App = () => {
 
 ```jsx
     <button onClick={openModal}>Open modal</button>
+```
+
+7. Choose to customize styles and modal
+
+You can choose to :
+* Display the icon with : `showCloseIcon={false}`
+* Delete the style importation ~~``import '@magma73/modal-react/dist/style.css';``~~ and add your own style using : `{styles.yourStyle}`
+
+```jsx
+    <Modal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        customModal={styles.modalContent}
+        customContainerInformations={styles.containerInformations}
+        customBtnClose={styles.btnClose}
+        customIconClose={styles.picture}
+        title="Your Message Has Been Sent"
+        titleClose="Close the message"
+        showCloseIcon={false}
+    >
+        <p>Hello world !</p>
+    </Modal>
 ```
 
 ## Authors
