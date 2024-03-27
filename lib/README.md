@@ -21,7 +21,7 @@ The Modal React component provides a flexible and customizable modal window for 
 * PropTypes V15.8.1
 * NPM V10.2.3
 * NodeJS V20.10.0
-* VS Code
+* VS Code V1.87.2
 
 ## Install
 To install, you can use [npm](https://npmjs.org/) or [yarn](https://yarnpkg.com):
