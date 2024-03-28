@@ -164,6 +164,7 @@ You can choose to :
         closeModal={closeModal}
         customModal={styles.modalContent}
         customContainerInformations={styles.containerInformations}
+        customTitle={styles.title}
         customBtnClose={styles.btnClose}
         customIconClose={styles.picture}
         title="Your Message Has Been Sent"
