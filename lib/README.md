@@ -26,9 +26,9 @@ The Modal React component provides a flexible and customizable modal window for 
 ## Install
 To install, you can use [npm](https://npmjs.org/) or [yarn](https://yarnpkg.com):
 
-    $ npm install --save @magma/modal-react
+    $ npm install --save @magma73/modal-react
 
-    $ yarn add @magma/modal-react
+    $ yarn add @magma73/modal-react
 
 
 ## Usage

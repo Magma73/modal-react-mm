@@ -12,7 +12,6 @@ import closeIcon from "./closeIcon.svg";
  * @returns {JSX.Element} - The modal component.
  */
 export default function Modal({ isOpen, closeModal, title, titleClose, children, customModal, customContainerInformations, customTitle, customBtnClose, customIconClose, showCloseIcon }) {
-
     const handleKeyDown = (event) => {
         if (event.key === 'Escape') {
             closeModal();
@@ -29,35 +28,36 @@ export default function Modal({ isOpen, closeModal, title, titleClose, children,
 
     if (isOpen) {
         window.addEventListener('keydown', handleKeyDown);
-        const dialogElement = document.querySelector('[role="dialog"]');
 
-        if (dialogElement !== null) {
-            // Focus on the first focusable element inside the dialog
-            const focusableElements = dialogElement.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            const firstFocusableElement = focusableElements[focusableElements.length - 1];
-            const lastFocusableElement = focusableElements[0];
-            firstFocusableElement.focus();
+        setTimeout(() => {
+            const dialogElement = document.querySelector('[role="dialog"]');
+            if (dialogElement) {
+                const focusableElements = dialogElement.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                const firstFocusableElement = focusableElements[focusableElements.length - 1];
+                const lastFocusableElement = focusableElements[0];
+                firstFocusableElement.focus();
 
-            // Handle tab key event to maintain focus within the modal
-            const handleKeyDownTab = (event) => {
-                if (event.key === 'Tab') {
-                    if (event.shiftKey) {
-                        if (document.activeElement === firstFocusableElement) {
-                            event.preventDefault();
-                            lastFocusableElement.focus();
-                        }
-                    } else {
-                        if (document.activeElement === lastFocusableElement) {
-                            event.preventDefault();
-                            firstFocusableElement.focus();
+                // Handle tab key event to maintain focus within the modal
+                const handleKeyDownTab = (event) => {
+                    if (event.key === 'Tab') {
+                        if (event.shiftKey) {
+                            if (document.activeElement === firstFocusableElement) {
+                                event.preventDefault();
+                                lastFocusableElement.focus();
+                            }
+                        } else {
+                            if (document.activeElement === lastFocusableElement) {
+                                event.preventDefault();
+                                firstFocusableElement.focus();
+                            }
                         }
                     }
-                }
-            };
-            dialogElement.addEventListener('keydown', handleKeyDownTab);
-        }
+                };
+                dialogElement.addEventListener('keydown', handleKeyDownTab);
+            }
+        }, 100);
 
         return (
             <dialog
@@ -67,7 +67,6 @@ export default function Modal({ isOpen, closeModal, title, titleClose, children,
                 aria-modal="true"
                 tabIndex="-1"
                 role="dialog"
-
             >
                 <div className={`${styles.containerInformations} ${customContainerInformations}`}>
                     <h2 className={`${styles.title} ${customTitle}`}>{title}</h2>
