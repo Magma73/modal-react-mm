@@ -11,7 +11,20 @@ import closeIcon from "./closeIcon.svg";
  * @param {string} [props.customStyles] - Custom styles for the modal.
  * @returns {JSX.Element} - The modal component.
  */
-export default function Modal({ isOpen, closeModal, title, titleClose, children, customModal, customContainerInformations, customTitle, customBtnClose, customIconClose, showCloseIcon }) {
+const Modal = ({
+    isOpen,
+    closeModal,
+    title,
+    titleClose,
+    children,
+    customModal,
+    customContainerInformations,
+    customTitle,
+    customBtnClose,
+    customIconClose,
+    showCloseIcon,
+}) => {
+    
     const handleKeyDown = (event) => {
         if (event.key === 'Escape') {
             closeModal();
@@ -126,3 +139,5 @@ Modal.propTypes = {
 Modal.defaultProps = {
     showCloseIcon: true,
 };
+
+export default Modal;
